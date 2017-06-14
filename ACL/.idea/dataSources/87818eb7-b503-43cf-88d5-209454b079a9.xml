@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="acl@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="4.2">
+    <root id="1"/>
+    <schema id="2" parent="1" name="acl">
+      <Current>1</Current>
+      <Visible>1</Visible>
+    </schema>
+    <schema id="3" parent="1" name="bigdata_ldp"/>
+    <schema id="4" parent="1" name="db"/>
+    <schema id="5" parent="1" name="dbsyncro"/>
+    <schema id="6" parent="1" name="dbsyncro0531"/>
+    <schema id="7" parent="1" name="devcocha0531"/>
+    <schema id="8" parent="1" name="devcocha0609"/>
+    <schema id="9" parent="1" name="htravel_ldp"/>
+    <schema id="10" parent="1" name="information_schema"/>
+    <schema id="11" parent="1" name="mysql"/>
+    <schema id="12" parent="1" name="performance_schema"/>
+    <schema id="13" parent="1" name="test"/>
+    <schema id="14" parent="1" name="xplayat"/>
+    <schema id="15" parent="1" name="xplayatbigdata"/>
+    <schema id="16" parent="1" name="xplayatbigdatalocal"/>
+    <schema id="17" parent="1" name="xplayatsyncro"/>
+  </database-model>
+</dataSource>

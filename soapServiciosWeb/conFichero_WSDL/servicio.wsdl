@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" 
+                  xmlns:soap-enc="http://schemas.xmlsoap.org/soap/encoding/" 
+                  xmlns:soap-env="http://schemas.xmlsoap.org/wsdl/soap/" 
+                  xmlns:tns="http://localhost/www/PhpstormProjects/soapServiciosWeb/conFichero_WSDL/" 
+                  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+                  targetNamespace="http://localhost/www/PhpstormProjects/soapServiciosWeb/conFichero_WSDL/">
+    <wsdl:types>
+        <xsd:schema targetNamespace="http://localhost/www/PhpstormProjects/soapServiciosWeb/conFichero_WSDL/"/>
+    </wsdl:types>
+    <wsdl:message name="getPVPRequest">
+        <wsdl:part name="codigo" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="getPVPResponse">
+        <wsdl:part name="getPVPReturn" type="xsd:float"/>
+    </wsdl:message>
+    <wsdl:message name="getFamiliasRequest"/>
+    <wsdl:message name="getFamiliasResponse">
+        <wsdl:part name="getFamiliasReturn" type="soap-enc:array"/>
+
+    </wsdl:message>
+    <wsdl:message name="getProductosFamiliaRequest">
+        <wsdl:part name="familia" type="xsd:string"/>
+    </wsdl:message>
+    <wsdl:message name="getProductosFamiliaResponse">
+        <wsdl:part name="getProductosFamiliaReturn" type="soap-enc:array"/>
+
+    </wsdl:message>
+    <wsdl:message name="getStockRequest">
+        <wsdl:part name="codigo" type="xsd:string"/>
+        <wsdl:part name="tienda" type="xsd:int"/>
+
+    </wsdl:message>
+    <wsdl:message name="getStockResponse">
+        <wsdl:part name="getStockReturn" type="xsd:int"/>
+
+    </wsdl:message>
+    <wsdl:portType name="ServicioPortType">
+        <wsdl:operation name="getPVP">
+            <wsdl:documentation>Obtiene el PVP de un producto a partir de su código</wsdl:documentation>
+            <wsdl:input message="tns:getPVPRequest"/>
+            <wsdl:output message="tns:getPVPResponse"/>
+
+        </wsdl:operation>
+        <wsdl:operation name="getFamilias">
+            <wsdl:documentation>Devuelve un array con los códigos de todas las familias</wsdl:documentation>
+            <wsdl:input message="tns:getFamiliasRequest"/><wsdl:output message="tns:getFamiliasResponse"/></wsdl:operation><wsdl:operation name="getProductosFamilia"><wsdl:documentation>Devuelve un array con los códigos de los productos de una familia</wsdl:documentation><wsdl:input message="tns:getProductosFamiliaRequest"/><wsdl:output message="
+tns:getProductosFamiliaResponse"/></wsdl:operation><wsdl:operation name="getStock"><wsdl:documentation>Devuelve el número de unidades que existen en una tienda de un producto</wsdl:documentation><wsdl:input message="tns:getStockRequest"/><wsdl:output message="tns:getStockResponse"/></wsdl:operation></wsdl:portType><wsdl:binding name="ServicioBinding" type="tns:ServicioPortType"><soap-env:binding xmlns="http://schemas.xmlsoap.org/wsdl/soap/" style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/><wsdl:operation name="getPVP"><soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://localhost/www/PhpstormProjects/soapServiciosWeb/conFichero_WSDL/ServicioW.php?method=getPVP" style="rpc"/><wsdl:input><soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></wsdl:input><wsdl:output><soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></wsdl:output></wsdl:operation><wsdl:operation name="getFamilias"><soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://localhost/www/PhpstormProjects/soapServiciosWeb/conFichero_WSDL/ServicioW.php?method=getFamilias" style="rpc"/><wsdl:input><soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></wsdl:input><wsdl:output><soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></wsdl:output></wsdl:operation><wsdl:operation name="getProductosFamilia"><soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://localhost/www/PhpstormProjects/soapServiciosWeb/conFichero_WSDL/ServicioW.php?method=getProductosFamilia" style="rpc"/><wsdl:input><soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></wsdl:input><wsdl:output><soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></wsdl:output></wsdl:operation><wsdl:operation name="getStock"><soap-env:operation xmlns="http://schemas.xmlsoap.org/wsdl/soap/" soapAction="http://localhost/www/PhpstormProjects/soapServiciosWeb/conFichero_WSDL/ServicioW.php?method=getStock" style="rpc"/><wsdl:input><soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></wsdl:input><wsdl:output><soap-env:body xmlns="http://schemas.xmlsoap.org/wsdl/soap/" use="encoded" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/></wsdl:output></wsdl:operation></wsdl:binding><wsdl:service name="Servicio"><wsdl:documentation>Created by PhpStorm. User: dlvivanco Date: 30/03/2017 Time: 16:24</wsdl:documentation><wsdl:port name="ServicioPort" binding="tns:ServicioBinding"><soap-env:address location="http://localhost/www/PhpstormProjects/soapServiciosWeb/conFichero_WSDL/ServicioW.php"/></wsdl:port></wsdl:service>
+</wsdl:definitions>
