@@ -1,6 +1,6 @@
 <?php
-$url = "http://localhost/practicasPHP/soapServiciosWeb/sinOriginal/servicio.php";
-$uri = "http://localhost/practicasPHP/soapServiciosWeb/sinOriginal/";
+$url = "http://localhost/practicasPHP/soapWS/sinF/servicio.php";
+$uri = "http://localhost/practicasPHP/soapWS/sinF/";
 
 $cliente = new SoapClient(null, array('location'=>$url,'uri'=>$uri));
 
