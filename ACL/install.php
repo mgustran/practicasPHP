@@ -1,9 +1,6 @@
 <?php 
-include("assets/php/database.php");
-
-
-?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+include("assets/php/database.php"); 
+?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -22,15 +19,21 @@ include("assets/php/database.php");
 </body>
 </html>
 <?php
-include("assets/php/class.acl.php");
-$myACL = new ACL();
-
+function parse_mysql_dump($url){
+	$file_content = file($url);
+	foreach($file_content as $sql_line){
+		if(trim($sql_line) != "" && strpos($sql_line, "--") === false){
+			//echo $sql_line . '<br>';
+			mysql_query($sql_line);
+		}
+	}
+}
 if (isset($_POST['go']))
 {
-	$myACL->parse_mysql_dump("install.sql");
+	parse_mysql_dump("install.sql");
 	if ($_POST['samples'] == '1')
 	{
-		$myACL->parse_mysql_dump("sampleData.sql");
+		parse_mysql_dump("sampleData.sql");
 	}
 	header("location: index.php");
 }

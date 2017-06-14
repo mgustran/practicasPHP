@@ -1,4 +1,3 @@
-USE acl;
 TRUNCATE `permissions`;
 TRUNCATE `roles`;
 TRUNCATE `role_perms`;
