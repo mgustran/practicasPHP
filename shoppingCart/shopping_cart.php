@@ -29,8 +29,9 @@ class Product {
 $products = array(
   1 => new Product( 1, "SuperWidget", 19.99 ),
   2 => new Product( 2, "MegaWidget", 29.99 ),
-  3 => new Product( 3, "WonderWidget", 39.99 )
-);
+  3 => new Product( 3, "HyperWidget", 39.99 ),
+  4 => new Product( 4, "UltraWidget", 24.99 ),
+  5 => new Product( 5, "KaliWidget", 16.99));
 
 if ( !isset( $_SESSION["cart"] ) ) $_SESSION["cart"] = array();
 
@@ -44,8 +45,11 @@ if ( isset( $_GET["action"] ) and $_GET["action"] == "addItem" ) {
 
 function addItem() {
   global $products;
-  if ( isset( $_GET["productId"] ) and $_GET["productId"] >= 1 and $_GET["productId"] <= 3 ) {
+  global $addItemQuantity;
+  if ( isset( $_GET["productId"] ) and $_GET["productId"] >= 1 and $_GET["productId"] <= 5 ) {
     $productId = (int) $_GET["productId"];
+
+    $_SESSION['addItemQuantity'][$productId]++;
 
     if ( !isset( $_SESSION["cart"][$productId] ) ) {
       $_SESSION["cart"][$productId] = $products[$productId];
@@ -61,7 +65,9 @@ function removeItem() {
   if ( isset( $_GET["productId"] ) and $_GET["productId"] >= 1 and $_GET["productId"] <= 3 ) {
     $productId = (int) $_GET["productId"];
 
-    if ( isset( $_SESSION["cart"][$productId] ) ) {
+    $_SESSION['addItemQuantity'][$productId]--;
+
+    if ( isset( $_SESSION["cart"][$productId] ) and $_SESSION['addItemQuantity'][$productId] < 1) {
       unset( $_SESSION["cart"][$productId] );
     }
   }
@@ -89,14 +95,30 @@ function displayCart() {
 <?php
 $totalPrice = 0;
 foreach ( $_SESSION["cart"] as $product ) {
-  $totalPrice += $product->getPrice();
+  $productId = $product->getId();
+  $totalPrice += $product->getPrice()*$_SESSION['addItemQuantity'][$productId];
+  $cantidad = $_SESSION['addItemQuantity'][$productId];
 ?>
       <dt><?php echo $product->getName() ?></dt>
       <dd>$<?php echo number_format( $product->getPrice(), 2 ) ?>
-      <a href="shopping_cart.php?action=removeItem&amp;productId=<?php echo $product->getId() ?>">Remove</a></dd>
+        <a href="shopping_cart.php?action=removeItem&amp;productId=<?php echo $product->getId() ?>">
+          -
+        </a>
+
+        <span class="icons"><?php echo $_SESSION['addItemQuantity'][$productId];?></span>
+
+        <a href="shopping_cart.php?action=addItem&amp;productId=<?php echo $product->getId() ?>">
+          +
+        </a>
+
+        <span class="total">$<?php echo number_format($cantidad * $product->getPrice(), 2)?></span>
+      </dd>
 <?php } ?>
       <dt>Cart Total:</dt>
-      <dd><strong>$<?php echo number_format( $totalPrice, 2 ) ?></strong></dd>
+      <dd>
+        <strong class="totalPrice">Total</strong>
+        <strong class="totalPrice">$<?php echo number_format( $totalPrice, 2 ) ?></strong>
+      </dd>
     </dl>
 
     <h1>Product list</h1>
@@ -112,6 +134,7 @@ foreach ( $_SESSION["cart"] as $product ) {
 <?php
 }
 ?>
+
 
   </body>
 </html>
