@@ -1,15 +1,15 @@
 -- Creamos la base de datos
-CREATE DATABASE `dwes` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
-USE `dwes`;
+CREATE DATABASE `phpShop` DEFAULT CHARACTER SET utf8 COLLATE utf8_spanish_ci;
+USE `phpShop`;
 
 -- Creamos las tablas
-CREATE TABLE `dwes`.`tienda`(
+CREATE TABLE `phpShop`.`tienda`(
 `cod` INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
 `nombre` VARCHAR(100) NOT NULL,
 `tlf` VARCHAR(13) NULL)
  ENGINE=INNODB;
 
-CREATE TABLE `dwes`.`producto` (
+CREATE TABLE `phpShop`.`producto` (
 `cod` VARCHAR(12) NOT NULL,
 `nombre` VARCHAR(200) NULL,
 `nombre_corto` VARCHAR(50) NOT NULL,
@@ -22,12 +22,12 @@ UNIQUE(`nombre_corto`)
 )ENGINE = INNODB;
 
 
-CREATE TABLE `dwes`.`familia` (`cod` VARCHAR(6) NOT NULL,
+CREATE TABLE `phpShop`.`familia` (`cod` VARCHAR(6) NOT NULL,
 `nombre` VARCHAR (200) NOT NULL,
 PRIMARY KEY (`cod`)
 ) ENGINE=INNODB;
 
-CREATE TABLE `dwes`.`stock` (`producto` VARCHAR(12) NOT NULL,
+CREATE TABLE `phpShop`.`stock` (`producto` VARCHAR(12) NOT NULL,
 `tienda` INT NOT NULL,
 `unidades` INT NOT NULL,
 PRIMARY KEY(`producto`,`tienda`)
@@ -49,7 +49,7 @@ FOREIGN KEY (`producto`) REFERENCES `producto` (`cod`)
 ON UPDATE CASCADE;
 
 
-CREATE USER `dwes` IDENTIFIED BY 'abc123.';
+CREATE USER `phpShop` IDENTIFIED BY 'abc123.';
 
-GRANT ALL ON `dwes` .* TO `dwes`;
+GRANT ALL ON `phpShop` .* TO `phpShop`;
 
