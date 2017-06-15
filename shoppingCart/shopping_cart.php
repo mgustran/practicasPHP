@@ -30,8 +30,8 @@ $products = array(
   1 => new Product( 1, "SuperWidget", 19.99 ),
   2 => new Product( 2, "MegaWidget", 29.99 ),
   3 => new Product( 3, "HyperWidget", 39.99 ),
-  4 => new Product( 4, "UltraWidget", 24.99 ),
-  5 => new Product( 5, "KaliWidget", 16.99));
+  4 => new Product( 4, "UltraWidget", 49.99 ),
+  5 => new Product( 5, "KaliWidget", 59.99));
 
 if ( !isset( $_SESSION["cart"] ) ) $_SESSION["cart"] = array();
 
